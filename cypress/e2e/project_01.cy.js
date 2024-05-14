@@ -102,8 +102,7 @@ describe("Homework01", () => {
     cy.on('uncaught:exception', () => {
       return false
     })
-    
+
   });
 
 });
-
