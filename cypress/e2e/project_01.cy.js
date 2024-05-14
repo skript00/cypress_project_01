@@ -56,9 +56,11 @@ describe("Homework01", () => {
   });
 
   it.only("Test Case 05 - Validate the Email input box", () => {
-    cy.get('.field .label').eq(2).should('be.visible')
+    cy.get('.field .input').eq(2).should('be.visible')
     .and('have.attr', 'required')
-    
+
+    cy.get('.label').eq(3).should('have.text', 'Email *')
+    cy.get('.input').eq(2).should('have.attr', 'placeholder', 'Enter your email')
 
   });
 
