@@ -21,26 +21,45 @@ describe("Homework01", () => {
 
   const buttons = ['Male', 'Female', 'Prefer not to disclose']
 
-  it.only("Test Case 03 - Validate the Gender radio button", () => {
+  it("Test Case 03 - Validate the Gender radio button", () => {
     cy.get('.control > .label').should('have.text', 'Gender *')
     cy.get('.mr-1').should('have.attr', 'required');
+
     cy.get('.radio').each(($el, index) => {
       cy.wrap($el).should('have.text', buttons[index])
       .children().should('be.enabled').and('not.be.checked')
     })
+
     cy.get(".radio input").eq(0).click();
+
     cy.get(".radio").each(($el, index) => {
       if ($el.text() === "Male") cy.wrap($el).children().should("be.checked");
       else cy.wrap($el).children().should("not.be.checked");
     });
+
+    cy.get(".radio input").eq(1).click();
+
+
+    cy.get('.radio').each(($el, index) => {
+      if ($el.text() === 'Female') cy.wrap($el).children().should('be.checked')
+      else cy.wrap($el).children().should("not.be.checked");
+    })
+
   });
 
   it("Test Case 04 - Validate the Address input box", () => {
-    
+    cy.get('.field .label').eq(1).should('be.visible')
+    .and('not.have.attr', 'required')
+
+    cy.get('.label').eq(2).should('have.text', 'Address')
+    cy.get('.input').eq(1).should('have.attr', 'placeholder', 'Enter your address')
   });
 
-  it("Test Case 05 - Validate the Email input box", () => {
+  it.only("Test Case 05 - Validate the Email input box", () => {
+    cy.get('.field .label').eq(2).should('be.visible')
+    .and('have.attr', 'required')
     
+
   });
 
   it("Test Case 06 - Validate the Phone input box", () => {
