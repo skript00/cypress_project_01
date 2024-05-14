@@ -25,9 +25,14 @@ describe("Homework01", () => {
     cy.get('.control > .label').should('have.text', 'Gender *')
     cy.get('.mr-1').should('have.attr', 'required');
     cy.get('.radio').each(($el, index) => {
-      cy.wrap($el).should('have.text', buttons[index]).children().should('be.enabled').and('not.be.checked')
-      
+      cy.wrap($el).should('have.text', buttons[index])
+      .children().should('be.enabled').and('not.be.checked')
     })
+    cy.get(".radio input").eq(0).click();
+    cy.get(".radio").each(($el, index) => {
+      if ($el.text() === "Male") cy.wrap($el).children().should("be.checked");
+      else cy.wrap($el).children().should("not.be.checked");
+    });
   });
 
   it("Test Case 04 - Validate the Address input box", () => {
